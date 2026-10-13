@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il mio portfolio di statistica</title>
+<meta name="description" content="Progetti di analisi dei dati, modelli statistici e visualizzazione.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDF1F6; --ink:#16213A; --muted:#58647D; --grid:#D6DEE9;
+  --accent:#1F4FD8; --mark:#E8A317; --row:#F8FAFC; --line:#BFCADB;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#10182B; --ink:#E7ECF6; --muted:#93A0BA; --grid:#1D2742;
+    --accent:#7EA0FF; --mark:#F2B73A; --row:#151F37; --line:#2E3B5C;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10182B; --ink:#E7ECF6; --muted:#93A0BA; --grid:#1D2742;
+  --accent:#7EA0FF; --mark:#F2B73A; --row:#151F37; --line:#2E3B5C;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:400 1.0625rem/1.65 Literata,Georgia,serif;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+h1,h2,h3{font-family:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;line-height:1.1;margin:0}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--mark);outline-offset:2px}
+.wrap{max-width:960px;margin:0 auto;padding:0 1.25rem}
+nav{display:flex;gap:1.5rem;justify-content:flex-end;padding:1.25rem 0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700}
+nav a{color:var(--ink);text-decoration:none}
+nav a:hover{color:var(--accent)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;align-items:center;padding:2.5rem 0 3.5rem}
+.hero h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;letter-spacing:-.02em}
+.hero p{max-width:34ch;color:var(--muted);margin:1.25rem 0 0}
+.plot{background:var(--row);border:1px solid var(--line);padding:1rem 1rem .75rem}
+.plot svg{width:100%;height:auto;display:block}
+.plot-bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:.5rem;font-size:.9rem;color:var(--muted)}
+.plot-bar button{
+  font:700 .9rem 'Bricolage Grotesque',sans-serif;background:var(--ink);color:var(--paper);
+  border:0;padding:.5rem .9rem;cursor:pointer
+}
+.plot-bar button:hover{background:var(--accent);color:#fff}
+.bar{fill:var(--accent);transition:height .35s,y .35s}
+.curve{fill:none;stroke:var(--mark);stroke-width:2.5}
+.axis{stroke:var(--line);stroke-width:1}
+
+/* sections */
+section{padding:2.5rem 0}
+h2{font-size:1.9rem;font-weight:800;margin-bottom:1.25rem}
+.about{max-width:62ch}
+
+/* projects */
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
+.filters button{
+  font:700 .9rem 'Bricolage Grotesque',sans-serif;background:var(--row);color:var(--ink);
+  border:1px solid var(--line);padding:.4rem .85rem;cursor:pointer;border-radius:999px
+}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.project{
+  display:grid;grid-template-columns:5rem 1fr;gap:0 1.25rem;
+  background:var(--row);border:1px solid var(--line);border-left:5px solid var(--accent);
+  padding:1.25rem 1.25rem 1.1rem;margin-bottom:.9rem
+}
+.project .year{font:700 1.1rem 'Bricolage Grotesque',sans-serif;color:var(--muted)}
+.project h3{font-size:1.4rem;margin-bottom:.4rem}
+.project p{margin:0 0 .8rem}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .5rem;margin-bottom:.8rem}
+.meta span{font-size:.85rem;background:var(--paper);border:1px solid var(--line);padding:.1rem .55rem}
+.links{display:flex;gap:1.25rem;font-family:'Bricolage Grotesque',sans-serif;font-weight:700}
+.empty{color:var(--muted)}
+
+/* skills + contact */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.skills div{background:var(--row);border:1px solid var(--line);padding:1rem}
+.skills h3{font-size:1.05rem;margin-bottom:.4rem}
+.skills p{margin:0;color:var(--muted);font-size:.95rem}
+footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem}
+
+@media (max-width:720px){
+  .hero{grid-template-columns:1fr}
+  .project{grid-template-columns:1fr}
+  .project .year{margin-bottom:.25rem}
+}
+@media (prefers-reduced-motion:reduce){.bar{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Principale">
+    <a href="#progetti">Progetti</a>
+    <a href="#competenze">Competenze</a>
+    <a href="#contatti">Contatti</a>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1 id="name">Nome Cognome</h1>
+      <p id="tagline">Statistica e analisi dei dati: modelli, inferenza e visualizzazione.</p>
+    </div>
+    <figure class="plot" style="margin:0">
+      <svg id="hist" viewBox="0 0 400 240" role="img" aria-label="Istogramma di un campione casuale con la curva normale teorica"></svg>
+      <figcaption class="plot-bar">
+        <span id="stats">n = 200</span>
+        <button id="resample" type="button">Nuovo campione</button>
+      </figcaption>
+    </figure>
+  </header>
+
+  <section id="about">
+    <h2>Chi sono</h2>
+    <p class="about" id="about-text">
+      Scrivi qui due o tre frasi: il tuo percorso di studi, gli ambiti che ti interessano
+      (ad esempio inferenza bayesiana, serie storiche, biostatistica) e che cosa cerchi.
+    </p>
+  </section>
+
+  <section id="progetti">
+    <h2>Progetti</h2>
+    <div class="filters" id="filters" role="group" aria-label="Filtra per argomento"></div>
+    <div id="projects"></div>
+  </section>
+
+  <section id="competenze">
+    <h2>Competenze</h2>
+    <div class="skills" id="skills"></div>
+  </section>
+
+  <section id="contatti">
+    <h2>Contatti</h2>
+    <p id="contacts"></p>
+  </section>
+
+  <footer>Pagina statica per GitHub Pages. Per aggiornarla modifica solo la sezione <code>CONFIG</code> in questo file.</footer>
+</div>
+
+<script>
+/* =========================================================
+   CONFIG: modifica solo questa parte
+   ========================================================= */
+const CONFIG = {
+  name: "Emilio Manfredi",
+  tagline: "Applied Statistics and Data Science: models, inference and visualization.",
+  about: "A collection of personal projects",
+  contacts: [
+    { label: "GitHub",   url: "https://github.com/emimanfre" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/tuo-profilo" },
+    { label: "Email",    url: "mailto:nome@esempio.it" }
+  ],
+  skills: [
+    { title: "Linguaggi",       text: "R, Python, SQL" },
+    { title: "Modelli",         text: "Parametric and Nonparametric Regression and Classification, Model-Based Clustering, Neural Networks" },
+    { title: "Inferenza",       text: "Hypothesis testing and confidence intervals, bootstrap, computational methods for simulation" },
+    { title: "Visualizzazione", text: "ggplot2, matplotlib" }
+  ],
+  /* Un oggetto per progetto. "tags" serve per i filtri. I link sono facoltativi. */
+  projects: [
+    {
+      title: "Titolo del progetto 1",
+      year: 2026,
+      description: "In due righe: quale domanda hai posto, quali dati hai usato e che cosa hai trovato.",
+      tags: ["Regressione", "Visualizzazione"],
+      tools: ["R", "tidyverse", "ggplot2"],
+      links: [
+        { label: "Codice",  url: "https://github.com/tuo-username/progetto-1" },
+        { label: "Report",  url: "https://tuo-username.github.io/progetto-1/" }
+      ]
+    },
+    {
+      title: "Titolo del progetto 2",
+      year: 2025,
+      description: "Esempio: previsione di una serie storica con confronto tra ARIMA e modelli di smoothing.",
+      tags: ["Serie storiche"],
+      tools: ["Python", "statsmodels", "pandas"],
+      links: [{ label: "Codice", url: "https://github.com/tuo-username/progetto-2" }]
+    },
+    {
+      title: "Titolo del progetto 3",
+      year: 2024,
+      description: "Esempio: stima bayesiana di un effetto con prior informativi e controllo della sensibilità.",
+      tags: ["Bayesiana", "Inferenza"],
+      tools: ["R", "brms", "Stan"],
+      links: [{ label: "Codice", url: "https://github.com/tuo-username/progetto-3" }]
+    }
+  ]
+};
+
+/* =========================================================
+   Rendering
+   ========================================================= */
+const $ = id => document.getElementById(id);
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  kids.forEach(c => n.append(c));
+  return n;
+};
+
+document.title = CONFIG.name + " | Portfolio di statistica";
+$("name").textContent = CONFIG.name;
+$("tagline").textContent = CONFIG.tagline;
+$("about-text").textContent = CONFIG.about;
+
+// Contatti
+const contacts = $("contacts");
+CONFIG.contacts.forEach((c, i) => {
+  if (i) contacts.append("  ");
+  contacts.append(el("a", { href: c.url }, c.label));
+});
+
+// Competenze
+CONFIG.skills.forEach(s => {
+  $("skills").append(el("div", {}, el("h3", {}, s.title), el("p", {}, s.text)));
+});
+
+// Progetti con filtri
+let activeTag = "Tutti";
+const allTags = ["Tutti", ...new Set(CONFIG.projects.flatMap(p => p.tags))];
+
+function renderFilters() {
+  const box = $("filters");
+  box.replaceChildren();
+  allTags.forEach(tag => {
+    const b = el("button", { type: "button", "aria-pressed": String(tag === activeTag) }, tag);
+    b.addEventListener("click", () => { activeTag = tag; renderFilters(); renderProjects(); });
+    box.append(b);
+  });
+}
+
+function renderProjects() {
+  const box = $("projects");
+  box.replaceChildren();
+  const list = CONFIG.projects
+    .filter(p => activeTag === "Tutti" || p.tags.includes(activeTag))
+    .sort((a, b) => b.year - a.year);
+  if (!list.length) { box.append(el("p", { class: "empty" }, "Nessun progetto per questo argomento.")); return; }
+  list.forEach(p => {
+    const meta = el("div", { class: "meta" });
+    [...p.tags, ...p.tools].forEach(t => meta.append(el("span", {}, t)));
+    const links = el("div", { class: "links" });
+    (p.links || []).forEach(l => links.append(el("a", { href: l.url }, l.label)));
+    box.append(el("article", { class: "project" },
+      el("div", { class: "year" }, String(p.year)),
+      el("div", {}, el("h3", {}, p.title), el("p", {}, p.description), meta, links)
+    ));
+  });
+}
+renderFilters();
+renderProjects();
+
+/* =========================================================
+   Istogramma del campione (decorativo: ricampiona a ogni clic)
+   ========================================================= */
+const N = 200, BINS = 18, LO = -3.6, HI = 3.6;
+const W = 400, H = 240, PAD = { l: 12, r: 12, t: 12, b: 24 };
+const NS = "http://www.w3.org/2000/svg";
+const svg = $("hist");
+
+function normal() { // Box-Muller
+  let u = 0, v = 0;
+  while (!u) u = Math.random();
+  v = Math.random();
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+function mk(tag, attrs) {
+  const n = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  return n;
+}
+const x = v => PAD.l + (v - LO) / (HI - LO) * (W - PAD.l - PAD.r);
+const bw = (HI - LO) / BINS;
+const pdf = z => Math.exp(-z * z / 2) / Math.sqrt(2 * Math.PI);
+
+function draw() {
+  const data = Array.from({ length: N }, normal);
+  const counts = new Array(BINS).fill(0);
+  data.forEach(d => { const i = Math.floor((d - LO) / bw); if (i >= 0 && i < BINS) counts[i]++; });
+  const dens = counts.map(c => c / (N * bw));
+  const ymax = Math.max(...dens, pdf(0)) * 1.1;
+  const y = d => H - PAD.b - d / ymax * (H - PAD.b - PAD.t);
+
+  svg.replaceChildren();
+  svg.append(mk("line", { class: "axis", x1: PAD.l, x2: W - PAD.r, y1: H - PAD.b, y2: H - PAD.b }));
+  dens.forEach((d, i) => {
+    svg.append(mk("rect", {
+      class: "bar", x: x(LO + i * bw) + 1, width: x(LO + bw) - x(LO) - 2,
+      y: y(d), height: H - PAD.b - y(d)
+    }));
+  });
+  let path = "";
+  for (let k = 0; k <= 120; k++) {
+    const z = LO + k / 120 * (HI - LO);
+    path += (k ? "L" : "M") + x(z).toFixed(1) + " " + y(pdf(z)).toFixed(1);
+  }
+  svg.append(mk("path", { class: "curve", d: path }));
+  [-2, 0, 2].forEach(t => {
+    const lab = mk("text", { x: x(t), y: H - 7, "text-anchor": "middle", "font-size": 11, fill: "currentColor" });
+    lab.setAttribute("style", "fill:var(--muted);font-family:Bricolage Grotesque,sans-serif");
+    lab.textContent = t;
+    svg.append(lab);
+  });
+  const mean = data.reduce((a, b) => a + b, 0) / N;
+  const sd = Math.sqrt(data.reduce((a, b) => a + (b - mean) ** 2, 0) / (N - 1));
+  $("stats").textContent = `n = ${N}   media ${mean.toFixed(2)}   dev. st. ${sd.toFixed(2)}`;
+}
+draw();
+$("resample").addEventListener("click", draw);
+</script>
+</body>
+</html>
