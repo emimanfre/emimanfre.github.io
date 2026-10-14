@@ -215,9 +215,33 @@ const CONFIG = {
     { title: "Project title 4", year: 2024, method: "Classification", model: "Machine learning · Python", tools: ["Python", "scikit-learn"],
       description: "Placeholder: comparing classifiers on a real dataset.",
       links: [{ label: "Code", url: "https://github.com/emimanfre" }] },
-    { title: "Project title 5", year: 2024, method: "Unsupervised learning", model: "Machine learning · Python", tools: ["Python", "scikit-learn"],
-      description: "Placeholder: model-based clustering of multivariate data.",
-      links: [{ label: "Code", url: "https://github.com/emimanfre" }] },
+    { 
+      title: "Taiwanese Bankruptcy Prediction", 
+      year: 2024, // (o l'anno in cui l'hai svolto/pubblicato)
+      method: "Classification", // IMPORTANTE: deve corrispondere a una foglia di methodTree
+      model: "Machine learning · R", 
+      tools: ["R", "caret", "Boruta", "pROC", "ROCR", "ROSE"],
+      description: "Predicting corporate bankruptcy on a severely imbalanced dataset of Taiwanese companies (~3% rare event) through oversampling, wrapper feature selection, and Bayesian prior calibration.",
+      details: [
+        { 
+          heading: "Question", 
+          text: "How can we accurately identify companies at risk of bankruptcy when defaults represent only ~3% of the dataset, avoiding the high false-negative rate of standard classifiers?" 
+        },
+        { 
+          heading: "Data and methods", 
+          text: "Starting from the Kaggle Taiwanese Bankruptcy dataset (95 financial ratios), the training set was balanced via oversampling (70/30 split) and filtered using the Boruta wrapper algorithm. Seven models (Lasso, Naive Bayes, Logistic Regression, K-NN, Random Forest, Neural Networks, and Gradient Boosting) were tuned via 5-fold Cross-Validation." 
+        },
+        { 
+          heading: "Results", 
+          text: "Random Forest and Gradient Boosting achieved the highest ROC and Lift scores in the top deciles. Finally, predicted probabilities were recalibrated to true population priors (3% vs 97%) via Bayes' theorem, and the decision cutoff was optimized on the F1-measure to maximize sensitivity and precision on the validation set." 
+        }
+      ],
+      links: [
+        { label: "Report", url: "https://emimanfre.github.io/taiwan-bankruptcy-ml/analisi_bancarotta.html" },
+        { label: "Code", url: "https://github.com/emimanfre/taiwan-bankruptcy-ml" },
+        { label: "Dataset", url: "https://www.kaggle.com/datasets/fedesoriano/company-bankruptcy-prediction" }
+      ] 
+    },
     { title: "Project title 6", year: 2025, method: "Simulation", model: "Custom code · R / C++", tools: ["R", "C++"],
       description: "Placeholder: a simulation study on the bootstrap.",
       links: [{ label: "Code", url: "https://github.com/emimanfre" }] },
