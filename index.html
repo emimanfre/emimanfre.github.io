@@ -217,8 +217,8 @@ const CONFIG = {
       links: [{ label: "Code", url: "https://github.com/emimanfre" }] },
     { 
       title: "Taiwanese Bankruptcy Prediction", 
-      year: 2024, // (o l'anno in cui l'hai svolto/pubblicato)
-      method: "Classification", // IMPORTANTE: deve corrispondere a una foglia di methodTree
+      year: 2024
+      method: "Classification",
       model: "Machine learning · R", 
       tools: ["R", "caret", "Boruta", "pROC", "ROCR", "ROSE"],
       description: "Predicting corporate bankruptcy on a severely imbalanced dataset of Taiwanese companies (~3% rare event) through oversampling, wrapper feature selection, and Bayesian prior calibration.",
@@ -236,11 +236,11 @@ const CONFIG = {
           text: "Random Forest and Gradient Boosting achieved the highest ROC and Lift scores in the top deciles. Finally, predicted probabilities were recalibrated to true population priors (3% vs 97%) via Bayes' theorem, and the decision cutoff was optimized on the F1-measure to maximize sensitivity and precision on the validation set." 
         }
       ],
-      links: [
-        { label: "Report", url: "https://emimanfre.github.io/taiwan-bankruptcy-ml/analisi_bancarotta.html" },
+    links: [
+        { label: "Report", url: "https://emimanfre.github.io/taiwan-bankruptcy-ml/" },
         { label: "Code", url: "https://github.com/emimanfre/taiwan-bankruptcy-ml" },
         { label: "Dataset", url: "https://www.kaggle.com/datasets/fedesoriano/company-bankruptcy-prediction" }
-      ] 
+      ]
     },
     { title: "Project title 6", year: 2025, method: "Simulation", model: "Custom code · R / C++", tools: ["R", "C++"],
       description: "Placeholder: a simulation study on the bootstrap.",
